@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" href="../css/jquery-ui.css" rel="stylesheet" />
+        <script type="text/javascript" src="../src/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="../src/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../src/Element.js"></script>
+        <script type="text/javascript" src="../src/Button.js"></script>
+        <script type="text/javascript" src="../src/Text.js"></script>
+        <script type="text/javascript" src="../src/Event.js"></script>
+        <script type="text/javascript" src="../src/Select.js"></script>
+        <script type="text/javascript" src="../src/DataSet.js"></script>
+        <script type="text/javascript">
+		
+            var data = [
+                {id:'id1',name:'name1',value:'value1'},
+                {id:'id2',name:'name2',value:'value2'},
+                {id:'id3',name:'name3',value:'value3'},
+                {id:'id4',name:'name4',value:'value4'},
+            ];
+
+            var dataSet = new DataSet({
+                data:data
+            });
+
+            var select = undefined;
+            var text = undefined;
+			
+            function createSelect(){
+                select = new Select({
+                    id:'select1',
+                    dataSet:dataSet,
+                    columnValue:'name',
+                    columnText:'value',
+                    events:[{eventType:'change',functionEvent:showDatos}]
+                });
+                select.render('content');
+                var button = new Button({value:'add',events:[{eventType:'click',functionEvent:addOption}]});
+                button.render('content');
+                var button2 = new Button({value:'remove',events:[{eventType:'click',functionEvent:removeOption}]});
+                button2.render('content');
+                text = new Text({id:'text'});
+                var button3 = new Button({value:'selectValue',events:[{eventType:'click',functionEvent:function(){
+                                select.setSelectedValue(text.getValue());
+
+                }}]});
+                button3.render('content');
+                text.render('content');
+            }
+
+            function showDatos(element){
+                alert(element.getSelectedText() + " - " + element.getSelectedValue());
+            }
+
+            function addOption(){
+                var index = select.options.length;
+                select.addOption(new Option({text:'text'+index,value:'value'+index}));
+            }
+
+            function removeOption(){
+                select.removeOption(select.options.length-1);
+            }
+        </script>
+    </head>
+    <body onload="createSelect()">
+        <div id="content"></div>
+    </body>
+</html>

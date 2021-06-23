@@ -1,0 +1,50 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title></title>
+        <link type="text/css" href="../css/jquery-ui.css" rel="stylesheet" />
+        <script type="text/javascript" src="../src/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="../src/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../src/Element.js"></script>
+        <script type="text/javascript" src="../src/Button.js"></script>
+        <script type="text/javascript" src="../src/Event.js"></script>
+        <script type="text/javascript" src="../src/Text.js"></script>
+        <script type="text/javascript" src="../src/Table.js"></script>
+        <script type="text/javascript" src="../src/Label.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript">
+            function createTable(){
+                var tableConfig={
+                    id:'table',
+                    border:1,
+                    rows:[{cels:[
+                                {elements:[{type:'text',value:'Texto'}]},
+                                {elements:[{type:'button',value:'boton'}]}
+                            ]},{cels:[
+                                {elements:[{type:'label',text:'Label'},{type:'text',value:'Texto'}]},
+                                {elements:[{type:'button',value:'boton',events:[{eventType:'click',functionEvent:click}]}]}
+                            ]},{cels:[
+                                {elements:[{type:'label',text:'Label'},{type:'text',value:'Texto'}]},
+                                {elements:[{type:'button',value:'boton'}]}
+                            ]}
+                    ]
+                };
+                var table = new Table(tableConfig);
+                table.render('content');
+            }
+
+            function click(){
+                alert("onclick");
+            }
+        
+        </script>
+    </head>
+    <body onload="createTable()">
+        <div id="content"></div>
+        <div id="content2"></div>
+    </body>
+</html>

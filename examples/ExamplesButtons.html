@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type="text/css" href="../css/jquery-ui.css" rel="stylesheet" />
+        <script type="text/javascript" src="../src/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="../src/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../src/Element.js"></script>
+        <script type="text/javascript" src="../src/Button.js"></script>
+        <script type="text/javascript" src="../src/Text.js"></script>
+        <script type="text/javascript" src="../src/Event.js"></script>
+        <script type="text/javascript">
+            function createButton(){
+                var text = new Text({id:'idText',name:'nameText',value:'valueText',disabled:true});
+                var configButton={
+                    id:'idBoton',
+                    name:'nameBoton',
+                    value:'valueBoton',
+                    events:[
+                        {eventType:'click',functionEvent:onClick,arguments:new Array(1,text)}
+                    ]};
+                var button = new Button(configButton);
+                button.render('content');
+				
+                var button2 = new Button({id:'buton2', value:'Inactivar',events:[{eventType:'dblclick',functionEvent:function(){
+                                button.setDisabled(!button.isDisabled());
+                                if(button2.value == 'Inactivar')
+                                    button2.setValue('Activar');
+                                else
+                                    button2.setValue('Inactivar');
+                            }
+                        }]});
+                button2.render('content2');
+				
+                var button3 = new Button({id:'buton3', value:'Ocultar',events:[
+                        {eventType:'dblclick',functionEvent:function(){
+                                button.setVisible(!button.isVisible());
+                                if(button3.value == 'Ocultar')
+                                    button3.setValue('Mostrar');
+                                else
+                                    button3.setValue('Ocultar');
+                            }
+                        }
+                    ]});
+                button3.render('content2');
+            }
+			
+            function onClick(arguments,element){
+                var valor = arguments[0];
+                var objetoTexto = arguments[1];
+                var objetoInvocador = element;
+                alert("valor"+valor+"      objetoTexto:"+objetoTexto.id+"      objetoInvocador:" + objetoInvocador.id);
+            }
+        </script>
+    </head>
+    <body onload="createButton()">
+        <div id="content"></div>
+        <div id="content2"></div>
+    </body>
+</html>
